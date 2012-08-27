@@ -44,4 +44,4 @@ my-time-consuming-and-frequently-hanging-command & timeout $! &
 
 
 *** Note
-As a general rule, you should not need to edit this script unless you are following the instructions in the USER CONFIGURATION section. That said, should you make an improvement to the script, please fork the repository and sumbit a pull request.
+As a general rule, you should not need to edit this script unless you are following the instructions in the USER CONFIGURATION section. That said, should you make an improvement to the script, please fork the repository and submit a pull request.

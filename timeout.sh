@@ -6,8 +6,8 @@
 ### while using minimal computer resources.
 ###
 ### This functionality is particularly helpful when running commands
-### via cron(8). The script has debugging functionality that can be
-### configured for interactive or cron-based execution.
+### via cron(8). The script's debugging functionality can be specially
+### configured for cron-based execution.
 ###
 ### The script takes four arguments. Only the first is required. Each
 ### of the remaining arguments has a default value. If you wish, you
@@ -31,19 +31,19 @@
 ###     process will have to cleanup and exit before getting hit with
 ###     the next signal. (default 5: $PAUSE_DEFAULT)
 ###
-### RETURN VALUE:
+### EXIT VALUE:
 ###
 ###     0 when the monitored process exited normally
-###     1 when the monitored process is terminated because it timed out
+###     1 when the monitored process was terminated because it timed out
 ###    -1 if the monitored process couldn't be killed and is now a zombie
 ###
-### TYPICAL USAGES:
+### TYPICAL USE CASES:
 ###
 ###     Interactive:
 ###         $ my-time-consuming-and-frequently-hanging-command &
 ###         $ timeout $!
 ###
-###     Cron:
+###     Via cron:
 ###         sh -c 'my-time-consuming-and-frequently-hanging-command & timeout $!'
 ###
 ###     Within an existing shell script:
@@ -57,7 +57,7 @@
 ### As a general rule, you should not need to edit this script unless
 ### you are following the instructions in the USER CONFIGURATION
 ### section. That said, should you make an improvement to the script,
-### please fork the repository and sumbit a pull request.
+### please fork the repository and submit a pull request.
 ### ################################################################
 
 ### ################################################################
