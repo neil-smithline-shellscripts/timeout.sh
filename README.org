@@ -1,0 +1,47 @@
+* Process Timeout
+This shell script implements a process timeout. It has been designed to ensure that a process terminates in a timely manner while using minimal computer resources.
+
+This functionality is particularly helpful when running commands via cron(8). The script's debugging functionality can be specially  configured for cron-based execution.
+
+The script takes four arguments. Only the first is required. Each of the remaining arguments has a default value. If you wish, you can alter the default values in the script's USER CONFIGURATION section.
+
+*** Arguments
+- $1: PID of the process we are monitoring. (required)
+-  $2: total seconds process is allowed to run before killing it. (default 300: $MAXTIME_DEFAULT)
+
+- $3: seconds between checking to see if the process is still alive. Lower values make timeout() more responsive but put more load on your computer in general. (default 60: $INTERVAL_DEFAULT)
+
+- $4: seconds to wait before escalating to the next signal in $KILLSIGNALS. This is the number of seconds the monitored process will have to cleanup and exit before getting hit with the next signal. (default 5: $PAUSE_DEFAULT)
+
+*** Exit Value
+- 0 when the monitored process exited normally
+- 1 when the monitored process was terminated because it timed out
+- -1 if the monitored process couldn't be killed and is now a zombie
+
+*** Typical Use Cases
+***** Interactive
+#+BEGIN_SRC -n sh-mode
+$ my-time-consuming-and-frequently-hanging-command &
+$ timeout $!
+#+END_SRC
+
+***** Via Cron
+#+BEGIN_SRC -n sh-mode
+sh -c 'my-time-consuming-and-frequently-hanging-command & timeout $!'
+#+END_SRC
+
+***** Within An Existing Shell Script
+#+BEGIN_SRC -n sh-mode
+. timeout.sh
+my-time-consuming-and-frequently-hanging-command &
+timeout $!
+#+END_SRC
+
+***** When There Is No Need To Wait For The Monitored Process To Complete
+#+BEGIN_SRC -n sh-mode
+my-time-consuming-and-frequently-hanging-command & timeout $! &
+#+END_SRC
+
+
+*** Note
+As a general rule, you should not need to edit this script unless you are following the instructions in the USER CONFIGURATION section. That said, should you make an improvement to the script, please fork the repository and submit a pull request.
